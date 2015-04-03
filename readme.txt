@@ -38,4 +38,4 @@ No, It needs you to have BuddyPress Installed and activated
 * Initial release for BuddyPress  2.0+(Tested with BuddyPress 2.2.1)
 
 == Other Notes ==
-We appreciate your thoughts and suggestions. Please let us know your suggestions and comments on [BuddyDev Blog](http://buddydev.com/blog/) 
+We appreciate your thoughts and suggestions. Please let us know your suggestions and comments on [BuddyDev Blog](http://buddydev.com/buddypress/force-buddypress-users-to-upload-profile-photo/) 
