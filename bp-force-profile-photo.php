@@ -43,7 +43,7 @@ class BD_Force_User_Avatar_Helper {
 	 */
 	public function check_or_redirect() {
 		
-		if( ! is_user_logged_in() )
+		if( ! is_user_logged_in() || is_super_admin() )
 			return;
 		
 		//if we are here, the user is logged in
