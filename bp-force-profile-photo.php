@@ -53,6 +53,7 @@ class BD_Force_User_Avatar_Helper {
 		if( bp_is_my_profile() && bp_is_user_change_avatar() )
 			return;
 		
+		bp_core_add_message( __( 'Please upload your profile photo to start using this site.' ), 'error' );
 		//if we are here, user has not uploaded an avatar, let us redirect them to upload avatar page
 		bp_core_redirect( bp_loggedin_user_domain() . buddypress()->profile->slug .'/change-avatar/');
 		
