@@ -16,11 +16,9 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 = How it works:- =
 
 It checks if a users is logged in and whether they have a phofile photo or not. If they have not uploaded a profile photo, It redirects them to the Change avatar( or Change Profile Photo ) screen on their profile.
-The user will only be able to use the site after they upload a profile photo. **Site Admin ** user accounts are exception. They can use the site without uploading avatar.
+The user will only be able to use the site after they upload a profile photo. **Site Admin** user accounts are exception. They can use the site without uploading avatar.
 
 == Installation ==
-
-**This section describes how to install the plugin and get it working.**
 
 1. Download the zip file and extract
 1. Upload `bp-force-profile-photo` directory to the `/wp-content/plugins/` directory
