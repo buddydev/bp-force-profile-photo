@@ -46,8 +46,14 @@ class BD_Force_User_Avatar_Helper {
 		if( ! is_user_logged_in() || is_super_admin() )
 			return;
 		
+		$user_id = get_current_user_id();
+		
+		//should we skip check for the current user?
+		if( $this->skip_check( $user_id ) ) {
+			
+		}
 		//if we are here, the user is logged in
-		if( $this->has_uploaded_avatar( get_current_user_id() ) ) 
+		if( $this->has_uploaded_avatar( $user_id ) ) 
 			return ;
 		
 		if( bp_is_my_profile() && bp_is_user_change_avatar() )
@@ -60,6 +66,40 @@ class BD_Force_User_Avatar_Helper {
 		
 	}
     
+	public function skip_check( $user_id ) {
+		
+		$meta_keys = array(
+			'_fbid', //for kleo
+			'fb_account_id', //for BuddyPress Facebook Connect Plus
+			'oa_social_login_user_picture', //social login plugin
+			'oa_social_login_user_thumbnail',//social login plugin
+			'wsl_current_user_image', //WordPress social login plugin, may not work in some case
+			'facebook_avatar_full',//wp-fb-autoconnect
+			'facebook_uid',//for wp-fb-autoconnect
+		);
+		//use the below filter to remove/add any extra key
+		$meta_keys = apply_filters( 'bp_force_profile_photo_social_meta', $meta_keys );
+		
+		if( empty( $meta_keys ) )
+			return false;// we do not need to skip the test
+		
+	
+		$meta_keys = array_map( 'esc_sql', $meta_keys );
+		
+		$list = '\'' . join( '\', \'', $meta_keys ) . '\'';
+		
+		$meta_list = '(' . $list .')';
+		
+		global $wpdb;
+		
+		$has_meta = $wpdb->get_col( "SELECT meta_value FROM {$wpdb->usermeta} WHERE meta_key IN {$meta_list} and user_id = %d )", $user_id );
+		
+		if( ! empty( $has_meta ) )
+			return true;
+		
+		return false;
+		
+	}
 	/**
 	 * On New Avatar Upload, add the usermeta to reflect that user has uploaded an avatar
 	 * 
