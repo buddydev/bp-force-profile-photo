@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: BP Force Profile Photo
- * Version: 1.0
+ * Version: 1.0.2
  * Plugin URI: http://BuddyDev.com/plugins/bp-force-profile-photo/
  * Author: Brajesh Singh
  * Author URI: http://BuddyDev.com
@@ -20,6 +20,9 @@ class BD_Force_User_Avatar_Helper {
 		add_action( 'bp_core_delete_existing_avatar', array( $this, 'log_deleted' ) );
 
 		add_action( 'bp_template_redirect', array( $this, 'check_or_redirect' ), 1 );
+		
+		//load languages file
+		add_action( 'bp_init', array( $this, 'load_textdomain' ) );
             
 	}
 		
@@ -30,11 +33,17 @@ class BD_Force_User_Avatar_Helper {
     */
     public static function get_instance() { 
         
-        if( ! isset ( self::$instance ) )
+        if ( ! isset ( self::$instance ) ) {
             self::$instance = new self();
+		}
         
         return self::$instance;
     }
+	
+	
+	public function load_textdomain() {
+		load_plugin_textdomain( 'bp-force-profile-photo', false, plugin_basename( dirname( __FILE__ ) ) . '/languages'   );
+	}
 	
 	/**
 	 * Checks if a user has uploaded avatar and redirects to upload page if not
@@ -43,25 +52,28 @@ class BD_Force_User_Avatar_Helper {
 	 */
 	public function check_or_redirect() {
 		
-		if( ! is_user_logged_in() || is_super_admin() )
+		if ( ! is_user_logged_in() || is_super_admin() ) {
 			return;
+		}
 		
 		$user_id = get_current_user_id();
 		
 		//should we skip check for the current user?
-		if( $this->skip_check( $user_id ) ) {
+		if ( $this->skip_check( $user_id ) ) {
 			
 		}
 		//if we are here, the user is logged in
-		if( $this->has_uploaded_avatar( $user_id ) ) 
+		if ( $this->has_uploaded_avatar( $user_id ) ) {
 			return ;
+		}
 		
-		if( bp_is_my_profile() && bp_is_user_change_avatar() )
+		if ( bp_is_my_profile() && bp_is_user_change_avatar() ) {
 			return;
+		}
 		
-		bp_core_add_message( __( 'Please upload your profile photo to start using this site.' ), 'error' );
+		bp_core_add_message( __( 'Please upload your profile photo to start using this site.', 'bp-force-profile-photo' ), 'error' );
 		//if we are here, user has not uploaded an avatar, let us redirect them to upload avatar page
-		bp_core_redirect( bp_loggedin_user_domain() . buddypress()->profile->slug .'/change-avatar/');
+		bp_core_redirect( bp_loggedin_user_domain() . buddypress()->profile->slug . '/change-avatar/' );
 		
 		
 	}
@@ -80,9 +92,9 @@ class BD_Force_User_Avatar_Helper {
 		//use the below filter to remove/add any extra key
 		$meta_keys = apply_filters( 'bp_force_profile_photo_social_meta', $meta_keys );
 		
-		if( empty( $meta_keys ) )
+		if ( empty( $meta_keys ) ) {
 			return false;// we do not need to skip the test
-		
+		}
 	
 		$meta_keys = array_map( 'esc_sql', $meta_keys );
 		
@@ -94,8 +106,9 @@ class BD_Force_User_Avatar_Helper {
 		
 		$has_meta = $wpdb->get_col( "SELECT meta_value FROM {$wpdb->usermeta} WHERE meta_key IN {$meta_list} and user_id = %d )", $user_id );
 		
-		if( ! empty( $has_meta ) )
+		if ( ! empty( $has_meta ) ) {
 			return true;
+		}
 		
 		return false;
 		
@@ -117,8 +130,9 @@ class BD_Force_User_Avatar_Helper {
 	 */
     public function log_deleted( $args ) {
         
-		if( $args['object'] != 'user' )
+		if( $args['object'] != 'user' ) {
 			return;
+		}
         //we are sure it was user avatar delete
 
         //remove the log from user meta
@@ -134,8 +148,10 @@ class BD_Force_User_Avatar_Helper {
     public function has_uploaded_avatar( $user_id ) {
 		
 		$has_avatar =  bp_get_user_meta( $user_id, 'has_avatar', true );
-		if( ! $has_avatar )
+		
+		if ( ! $has_avatar ) {
 			$has_avatar = bp_get_user_has_avatar( $user_id );//fallback
+		}
 		
 		return $has_avatar;
 	}
