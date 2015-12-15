@@ -2,8 +2,8 @@
 Contributors: buddydev, sbrajesh
 Tags: buddypress, Profile, Avatar
 Requires at least: BuddyPress 2.0
-Tested up to: BuddyPress 2.4.2 
-Stable tag: 1.0.2
+Tested up to: BuddyPress 2.4.3
+Stable tag: 1.0.3
 License: GPLv2 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 

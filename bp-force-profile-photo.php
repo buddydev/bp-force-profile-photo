@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: BP Force Profile Photo
- * Version: 1.0.2
+ * Version: 1.0.3
  * Plugin URI: http://BuddyDev.com/plugins/bp-force-profile-photo/
  * Author: Brajesh Singh
  * Author URI: http://BuddyDev.com
@@ -104,7 +104,7 @@ class BD_Force_User_Avatar_Helper {
 		
 		global $wpdb;
 		
-		$has_meta = $wpdb->get_col( "SELECT meta_value FROM {$wpdb->usermeta} WHERE meta_key IN {$meta_list} and user_id = %d )", $user_id );
+		$has_meta = $wpdb->get_col( $wpdb->prepare( "SELECT meta_value FROM {$wpdb->usermeta} WHERE meta_key IN {$meta_list} and user_id = %d ", $user_id ) );
 		
 		if ( ! empty( $has_meta ) ) {
 			return true;
