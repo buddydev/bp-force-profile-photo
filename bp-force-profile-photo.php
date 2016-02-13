@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: BP Force Profile Photo
- * Version: 1.0.3
+ * Version: 1.0.4
  * Plugin URI: http://BuddyDev.com/plugins/bp-force-profile-photo/
  * Author: Brajesh Singh
  * Author URI: http://BuddyDev.com
@@ -88,6 +88,7 @@ class BD_Force_User_Avatar_Helper {
 			'wsl_current_user_image', //WordPress social login plugin, may not work in some case
 			'facebook_avatar_full',//wp-fb-autoconnect
 			'facebook_uid',//for wp-fb-autoconnect
+			'wsl_user_image',//for WordPress social login
 		);
 		//use the below filter to remove/add any extra key
 		$meta_keys = apply_filters( 'bp_force_profile_photo_social_meta', $meta_keys );
@@ -159,5 +160,3 @@ class BD_Force_User_Avatar_Helper {
 }
 
 BD_Force_User_Avatar_Helper::get_instance();
-
-
