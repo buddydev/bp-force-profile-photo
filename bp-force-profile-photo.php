@@ -57,10 +57,10 @@ class BD_Force_User_Avatar_Helper {
 		}
 		
 		$user_id = get_current_user_id();
-		
+
 		//should we skip check for the current user?
 		if ( $this->skip_check( $user_id ) ) {
-			
+			return;
 		}
 		//if we are here, the user is logged in
 		if ( $this->has_uploaded_avatar( $user_id ) ) {
@@ -82,6 +82,7 @@ class BD_Force_User_Avatar_Helper {
 		
 		$meta_keys = array(
 			'_fbid', //for kleo
+			'deuid', // AccessPress Social Login Lite
 			'fb_account_id', //for BuddyPress Facebook Connect Plus
 			'oa_social_login_user_picture', //social login plugin
 			'oa_social_login_user_thumbnail',//social login plugin
@@ -104,7 +105,7 @@ class BD_Force_User_Avatar_Helper {
 		$meta_list = '(' . $list .')';
 		
 		global $wpdb;
-		
+
 		$has_meta = $wpdb->get_col( $wpdb->prepare( "SELECT meta_value FROM {$wpdb->usermeta} WHERE meta_key IN {$meta_list} and user_id = %d ", $user_id ) );
 		
 		if ( ! empty( $has_meta ) ) {
