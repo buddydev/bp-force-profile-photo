@@ -1,10 +1,10 @@
 <?php
 /**
  * Plugin Name: BP Force Profile Photo
- * Version: 1.0.5
- * Plugin URI: http://BuddyDev.com/plugins/bp-force-profile-photo/
- * Author: Brajesh Singh
- * Author URI: http://BuddyDev.com
+ * Version: 1.0.6
+ * Plugin URI: https://BuddyDev.com/plugins/bp-force-profile-photo/
+ * Author: BuddyDev Team
+ * Author URI: https://BuddyDev.com
  * Description: Force a User to upload their profile photo(avatar) before they start using the site features.
  * License: GPL2 or above
  */
@@ -59,7 +59,7 @@ class BD_Force_User_Avatar_Helper {
 		$user_id = get_current_user_id();
 
 		//should we skip check for the current user?
-		if ( $this->skip_check( $user_id ) ) {
+		if ( apply_filters( 'bp_force_profile_photo_skip', false ) || $this->skip_check( $user_id ) ) {
 			return;
 		}
 		//if we are here, the user is logged in
