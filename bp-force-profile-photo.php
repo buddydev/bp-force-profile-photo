@@ -2,7 +2,7 @@
 
 /**
  * Plugin Name: BP Force Profile Photo
- * Version: 1.0.6
+ * Version: 1.0.7
  * Plugin URI: https://BuddyDev.com/plugins/bp-force-profile-photo/
  * Author: BuddyDev Team
  * Author URI: https://BuddyDev.com
