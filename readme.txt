@@ -2,8 +2,8 @@
 Contributors: buddydev, sbrajesh
 Tags: buddypress, Profile, Avatar
 Requires at least: BuddyPress 2.0
-Tested up to: BuddyPress 2.6.2
-Stable tag: 1.0.6
+Tested up to: BuddyPress 2.9.1
+Stable tag: 1.0.7
 License: GPLv2 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,6 +35,10 @@ No, It needs you to have BuddyPress Installed and activated
 
 
 == Changelog ==
+
+
+= 1.0.7 =
+* record the changes for proper user id even when admin uploads other user's avatar
 
 = 1.0.6 =
 * Added filter to skip urls
