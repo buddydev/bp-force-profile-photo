@@ -22,20 +22,22 @@ The user will only be able to use the site after they upload a profile photo. **
 
 == Installation ==
 
+1. Visit Dashboard->Plugins->add New
+2. Search for BP Force Profile Photo
+3. Install this plugin
+4. Click Activate
+
+= Or =
 1. Download the zip file and extract
-1. Upload `bp-force-profile-photo` directory to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Enjoy
+2. Upload `bp-force-profile-photo` directory to the `/wp-content/plugins/` directory
+3. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Frequently Asked Questions ==
 
 = Does This plugin works without BuddyPress =
 No, It needs you to have BuddyPress Installed and activated
 
-
-
 == Changelog ==
-
 
 = 1.0.7 =
 * record the changes for proper user id even when admin uploads other user's avatar
